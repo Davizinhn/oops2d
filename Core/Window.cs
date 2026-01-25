@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace oops2d.Core.Internal
+namespace oops2d.Core
 {
     public class Window
     {

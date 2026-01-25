@@ -1,9 +1,9 @@
 ﻿using Raylib_cs;
 using System.Numerics;
 
-namespace oops2d.Core.Utils
+namespace oops2d.Rendering
 {
-    public static class Rendering
+    public static class Utils
     {
         public static void DrawTextureTiled(Texture2D texture, Rectangle source, Rectangle dest, Vector2 origin, float rotation, float scale, Color tint)
         {

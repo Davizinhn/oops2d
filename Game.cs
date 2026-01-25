@@ -1,5 +1,4 @@
 ﻿using oops2d.Core;
-using oops2d.Core.Generics;
 using oops2d.Core.Internal;
 using Raylib_cs;
 using System.Diagnostics;

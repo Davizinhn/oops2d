@@ -31,7 +31,7 @@
   <ItemGroup>
     <Compile Include="Core\*.cs" />
     <Compile Include="Core\Internal\*.cs" />
-    <Compile Include="Core\Graphics\*.cs" />
+    <Compile Include="Rendering\*.cs" />
     <Compile Include="Core\Utils\*.cs" />
     <Compile Include="*.cs" />
   </ItemGroup>

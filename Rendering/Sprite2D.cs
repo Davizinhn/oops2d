@@ -1,11 +1,11 @@
 ﻿using Raylib_cs;
 using System.Numerics;
-using oops2d.Core.Generics;
-using oops2d.Core.Utils;
+using oops2d.Core.Internal;
+using oops2d.Core;
 
-namespace oops2d.Core.Graphics
+namespace oops2d.Rendering
 {
-    internal class Sprite2D : Object2D
+    public class Sprite2D : Transform2D
     {
         public Texture2D texture;
         public Color ColorTint;
@@ -37,10 +37,10 @@ namespace oops2d.Core.Graphics
             Rectangle rect;
             if (Tiled) {
                 rect = new Rectangle(0, 0, TileSize.X, TileSize.Y);
-                Rendering.DrawTextureTiled(texture, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), new Vector2(rect.Width / 2, rect.Height / 2), Rotation, GlobalScale, ColorTint);
+                Utils.DrawTextureTiled(texture, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), Origin, Rotation, GlobalScale, ColorTint);
             } else {
                 rect = new Rectangle(0, 0, (float)texture.Width, (float)texture.Height);
-                Raylib.DrawTexturePro(texture, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), new Vector2(rect.Width/2, rect.Height/2), Rotation, ColorTint);
+                Raylib.DrawTexturePro(texture, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), Origin, Rotation, ColorTint);
             }
 
             base.Draw(scene);
@@ -49,6 +49,19 @@ namespace oops2d.Core.Graphics
         public virtual void LoadSprite(string imgPath)
         {
             if (imgPath == null) return;
+
+            Rectangle rect;
+            if (Tiled)
+            {
+                rect = new Rectangle(0, 0, TileSize.X, TileSize.Y);
+                Origin = new Vector2(rect.Width / 2, rect.Height / 2);
+            } else
+            {
+                rect = new Rectangle(0, 0, (float)texture.Width, (float)texture.Height);
+                Origin = new Vector2(rect.Width / 2, rect.Height / 2);
+            }
+
+
             texture = Cache.Instance.LoadTexture(imgPath);
         }
 
