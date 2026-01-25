@@ -2,7 +2,7 @@
 
 namespace oops2d.Core
 {
-    internal class Scene2D
+    public class Scene2D
     {
         private List<Object2D> objects = new List<Object2D>();
         private bool isActive = true;

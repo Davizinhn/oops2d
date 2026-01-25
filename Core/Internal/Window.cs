@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace oops2d.Core.Internal
 {
-    class Window
+    public class Window
     {
         public int Width;
         public int Height;

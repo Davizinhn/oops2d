@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace oops2d
 {
-    class Game
+    public class Game
     {
         public static Game Instance { get; private set; }
 

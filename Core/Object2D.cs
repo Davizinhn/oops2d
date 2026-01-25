@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace oops2d.Core
 {
-    internal class Object2D
+    public class Object2D
     {
         public bool Visible = true;
         public bool UIElement = false;
