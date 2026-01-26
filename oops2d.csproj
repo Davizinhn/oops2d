@@ -32,8 +32,12 @@
     <Compile Include="Core\*.cs" />
     <Compile Include="Core\Internal\*.cs" />
     <Compile Include="Rendering\*.cs" />
-    <Compile Include="Core\Utils\*.cs" />
     <Compile Include="*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Input\Input.cs" />
+    <Compile Include="Math\Utils.cs" />
   </ItemGroup>
 
 </Project>

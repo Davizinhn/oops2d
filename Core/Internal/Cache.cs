@@ -4,72 +4,101 @@ namespace oops2d.Core.Internal
 {
     internal class Cache
     {
-        public static List<TextureCache> textures = new List<TextureCache>();
-        public static List<ImageCache> images = new List<ImageCache>();
-
         public static Cache Instance { get; private set; }
 
-        Image blankImage = new Image();
-        Texture2D blankTex = new Texture2D();
-        
+        private Dictionary<string, TextureCache> textures = new();
+        private Dictionary<string, ImageCache> images = new();
+
         public Cache() {
             Instance = this;
         }
 
         public Image LoadImage(string path)
         {
-            Image found = FindImageInCache(path);
-
-            if (found.Equals(blankImage))
+            if (images.TryGetValue(path, out ImageCache img))
             {
-                found = Raylib.LoadImage(path);
-                images.Add(new ImageCache(path, found));
+                return img.image;
             }
 
-            return found;
+            Image loaded = Raylib.LoadImage(path);
+            ImageCache cache = new ImageCache(path, loaded);
+            images[path] = cache;
+
+            return loaded;
         }
 
         public Texture2D LoadTexture(string path)
         {
-            Texture2D found = FindTextureInCache(path);
-
-            if (found.Equals(blankTex))
+            if (textures.TryGetValue(path, out TextureCache tex))
             {
-                Image image = LoadImage(path);
+                if (tex.texture2D.Id != 0)
+                {
+                    return tex.texture2D;
+                }
 
-                found = Raylib.LoadTextureFromImage(image);
-                textures.Add(new TextureCache(path, found));
+                textures.Remove(path);
             }
 
-            return found;
+            Image img = LoadImage(path);
+            Texture2D loaded = Raylib.LoadTextureFromImage(img);
+            TextureCache cache = new TextureCache(path, loaded);
+            textures[path] = cache;
+
+            return loaded;
         }
 
-        Image FindImageInCache(string path)
+        public void UnloadTexture(string path)
         {
-            foreach (ImageCache imageCache in images)
+            if (textures.TryGetValue(path, out TextureCache tex))
             {
-                if (imageCache.path == path)
-                {
-                    return imageCache.image;
+                if (tex.texture2D.Id != 0) 
+                { 
+                    Raylib.UnloadTexture(tex.texture2D);
                 }
+                textures.Remove(path);
             }
-
-
-            return blankImage;
         }
 
-        Texture2D FindTextureInCache(string path)
+        public void UnloadTexture(Texture2D texture)
         {
-            foreach (TextureCache textureCache in textures)
+            foreach (var kvp in textures)
             {
-                if (textureCache.path == path)
+                if (kvp.Value.texture2D.Id == texture.Id)
                 {
-                    return textureCache.texture2D;
+                    Raylib.UnloadTexture(kvp.Value.texture2D);
+                    textures.Remove(kvp.Key);
+                    break;
                 }
             }
+        }
 
+        public void UnloadImage(string path)
+        {
+            if (images.TryGetValue(path, out ImageCache img))
+            {
+                Raylib.UnloadImage(img.image);
+                images.Remove(path);
+            }
+        }
 
-            return blankTex;
+        public void UnloadAll()
+        {
+            foreach (var tex in textures.Values)
+            {
+                if (tex.texture2D.Id != 0)
+                {
+                    Raylib.UnloadTexture(tex.texture2D);
+                }
+
+            }
+
+            foreach (var img in images.Values)
+            {
+                Raylib.UnloadImage(img.image);
+            }
+
+            textures.Clear();
+            images.Clear();
         }
     }
 }

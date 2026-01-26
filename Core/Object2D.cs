@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace oops2d.Core
 {
@@ -7,9 +8,31 @@ namespace oops2d.Core
         public bool Visible = true;
         public bool UIElement = false;
 
-        public Vector2 GlobalPosition = new Vector2();
-        public float GlobalRotation = 0;
-        public float GlobalScale = 1;
+        public Transform2D transform = new Transform2D();
+        public Vector2 GlobalPosition
+        {
+            get
+            {
+                if (Parent == null) return transform.Position;
+                return Parent.GlobalPosition + transform.Position;
+            }
+        }
+        public float GlobalRotation
+        {
+            get
+            {
+                if (Parent == null) return transform.Rotation;
+                return Parent.GlobalRotation + transform.Rotation;
+            }
+        }
+        public float GlobalScale
+        {
+            get
+            {
+                if (Parent == null) return transform.Scale;
+                return Parent.GlobalScale * transform.Scale;
+            }
+        }
 
         public List<Object2D> children = new List<Object2D>();
         public bool destroyed = false;

@@ -1,9 +1,8 @@
-﻿using oops2d.Core;
-using oops2d.Core.Internal;
+﻿using oops2d.Core.Internal;
 using Raylib_cs;
 using System.Diagnostics;
 
-namespace oops2d
+namespace oops2d.Core
 {
     public class Game
     {

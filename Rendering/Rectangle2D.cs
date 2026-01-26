@@ -5,7 +5,7 @@ using oops2d.Core;
 
 namespace oops2d.Rendering
 {
-    public class Rectangle2D : Transform2D
+    public class Rectangle2D : Object2D
     {
         public Vector2 Size;
         public Color ColorTint;
@@ -19,15 +19,15 @@ namespace oops2d.Rendering
                 ColorTint = Color.White;
             }
 
-            this.Rotation = rot;
-            this.Position = pos;
+            this.transform.Rotation = rot;
+            this.transform.Position = pos;
             this.Size = size;
         }
 
         public override void Draw(Scene2D scene)
         {
             Rectangle rect = new Rectangle(GlobalPosition.X, GlobalPosition.Y, Size.X * GlobalScale, Size.Y * GlobalScale);
-            Raylib.DrawRectanglePro(rect, Origin, Rotation, ColorTint);
+            Raylib.DrawRectanglePro(rect, transform.Origin, transform.Rotation, ColorTint);
 
             base.Draw(scene);
         }

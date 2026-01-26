@@ -5,7 +5,7 @@ using oops2d.Core;
 
 namespace oops2d.Rendering
 {
-    public class Sprite2D : Transform2D
+    public class Sprite2D : Object2D
     {
         public Texture2D texture;
         public Color ColorTint;
@@ -21,9 +21,9 @@ namespace oops2d.Rendering
                 ColorTint = Color.White;
             }
 
-            this.Rotation = rot;
-            this.Scale = scale;
-            this.Position = pos;
+            this.transform.Rotation = rot;
+            this.transform.Scale = scale;
+            this.transform.Position = pos;
             this.Tiled = tiled;
             this.TileSize = tileSize;
 
@@ -37,10 +37,14 @@ namespace oops2d.Rendering
             Rectangle rect;
             if (Tiled) {
                 rect = new Rectangle(0, 0, TileSize.X, TileSize.Y);
-                Utils.DrawTextureTiled(texture, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), Origin, Rotation, GlobalScale, ColorTint);
+                Utils.DrawTextureTiled(texture, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), transform.Origin, transform.Rotation, GlobalScale, ColorTint);
             } else {
-                rect = new Rectangle(0, 0, (float)texture.Width, (float)texture.Height);
-                Raylib.DrawTexturePro(texture, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), Origin, Rotation, ColorTint);
+                rect = new Rectangle(0, 0, (float)texture.Width * GlobalScale, (float)texture.Height * GlobalScale);
+                Texture2D resizedTex = texture;
+                resizedTex.Width = (int)rect.Width;
+                resizedTex.Height = (int)rect.Height;
+
+                Raylib.DrawTexturePro(resizedTex, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), transform.Origin, transform.Rotation, ColorTint);
             }
 
             base.Draw(scene);
@@ -54,22 +58,22 @@ namespace oops2d.Rendering
             if (Tiled)
             {
                 rect = new Rectangle(0, 0, TileSize.X, TileSize.Y);
-                Origin = new Vector2(rect.Width / 2, rect.Height / 2);
+                transform.Origin = new Vector2(rect.Width / 2, rect.Height / 2);
             } else
             {
                 rect = new Rectangle(0, 0, (float)texture.Width, (float)texture.Height);
-                Origin = new Vector2(rect.Width / 2, rect.Height / 2);
+                transform.Origin = new Vector2(rect.Width / 2, rect.Height / 2);
             }
 
 
             texture = Cache.Instance.LoadTexture(imgPath);
         }
 
-        public override void Destroy(bool ?unloadTexture = true)
+        public override void Destroy(bool ?unloadTexture = false)
         {
-            if (!unloadTexture.HasValue || unloadTexture.Value == true)
+            if (unloadTexture!.Value == true)
             {
-                Raylib.UnloadTexture(texture);
+                Cache.Instance.UnloadTexture(texture);
             }
 
             base.Destroy();

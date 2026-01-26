@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 
-namespace oops2d.Core.Utils
+namespace oops2d.Math
 {
-    public static class Math
+    public static class Utils
     {
         public static float Clamp(float value, float min, float max)
         {
@@ -18,15 +18,6 @@ namespace oops2d.Core.Utils
         public static float Lerp(float start, float end, float amount)
         {
             float result = start + amount * (end - start);
-
-            return result;
-        }
-
-        public static Vector2 Vector2Lerp(Vector2 v1, Vector2 v2, float t)
-        {
-            Vector2 result = new Vector2(0,0);
-            result.X = Lerp(v1.X, v2.X, t);
-            result.Y = Lerp(v1.Y, v2.Y, t);
 
             return result;
         }
