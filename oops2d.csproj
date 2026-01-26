@@ -38,6 +38,12 @@
   <ItemGroup>
     <Compile Include="Input\Input.cs" />
     <Compile Include="Math\Utils.cs" />
+    <Compile Include="Rendering\Text\Text2D.cs" />
+    <Compile Include="Rendering\Text\TextFormat.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Rendering\UI\" />
   </ItemGroup>
 
 </Project>
