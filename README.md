@@ -13,7 +13,7 @@ Below is the current roadmap and progress tracker.
 | ✅ | Scene2D |
 | ✅ | Object2D |
 | 🔄 | Transform2D |
-| ⬜ | Component System (allow extensions via components) |
+| ⬜ | Component System (allow object2d extensions via components) |
 
 ---
 
@@ -23,7 +23,7 @@ Below is the current roadmap and progress tracker.
 | ✅ | Scene Object Lifecycle |
 | 🔄 | Scene Switching and Loading |
 | 🔄 | Object Hierarchy (parent-children interactions) |
-| ⬜ | Object Tags (for filtering big scenes) |
+| ⬜ | Object Tags (for filtering in big scenes) |
 
 ---
 
