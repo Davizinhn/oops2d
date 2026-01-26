@@ -39,6 +39,27 @@ Below is the current roadmap and progress tracker.
 
 ---
 
+## Text Rendering
+| Status | Item |
+|------|------|
+| ⬜ | Text2D |
+| ⬜ | Font Loading |
+| ⬜ | Bitmap Font Support |
+| ⬜ | Text Alignment & Wrapping |
+
+---
+
+## UI Rendering
+| Status | Item |
+|------|------|
+| 🔄 | UI Render Pass (camera-independent) |
+| ⬜ | UIElement Base Class |
+| ⬜ | Buttons / Labels |
+| ⬜ | Anchors & Scaling |
+| ⬜ | Basic Layout System |
+
+---
+
 ## Math Module
 | Status | Item |
 |------|------|
