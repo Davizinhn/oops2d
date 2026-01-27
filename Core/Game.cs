@@ -34,6 +34,10 @@ namespace oops2d.Core
         void Initialize(Scene2D initialScene)
         {
             Raylib.InitWindow(window.Width, window.Height, window.Name);
+            if (window.Icon.Width > 0)
+            {
+                Raylib.SetWindowIcon(window.Icon);
+            }
 
             Raylib.SetTargetFPS(Raylib.GetMonitorRefreshRate(0));
 
