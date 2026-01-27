@@ -2,13 +2,13 @@
 using System.Numerics;
 using oops2d.Core.Internal;
 using oops2d.Core;
+using oops2d.Rendering.Internal;
 
 namespace oops2d.Rendering
 {
-    public class Rectangle2D : Object2D
+    public class Rectangle2D : Renderer2D
     {
         public Vector2 Size;
-        public Color ColorTint;
 
         public Rectangle2D(Color tint = new Color(), Vector2 pos = default, Vector2 size = default, float rot = 0)
         {
@@ -27,12 +27,12 @@ namespace oops2d.Rendering
         public override void Draw(Scene2D scene)
         {
             Rectangle rect = new Rectangle(GlobalPosition.X, GlobalPosition.Y, Size.X * GlobalScale, Size.Y * GlobalScale);
-            Raylib.DrawRectanglePro(rect, transform.Origin, transform.Rotation, ColorTint);
+            Raylib.DrawRectanglePro(rect, transform.Origin, transform.Rotation, new Color(ColorTint.R, ColorTint.B, ColorTint.G, Alpha));
 
             base.Draw(scene);
         }
 
-        public virtual Rectangle GetRectangle()
+        public override Rectangle GetRectangle()
         {
             Rectangle rect = new Rectangle(GlobalPosition.X, GlobalPosition.Y, Size.X * GlobalScale, Size.Y * GlobalScale);
             return new Rectangle(GlobalPosition - transform.Origin, new Vector2(rect.Width * GlobalScale, rect.Height * GlobalScale));

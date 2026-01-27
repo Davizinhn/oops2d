@@ -1,14 +1,14 @@
-﻿using Raylib_cs;
-using System.Numerics;
+﻿using oops2d.Core;
 using oops2d.Core.Internal;
-using oops2d.Core;
+using oops2d.Rendering.Internal;
+using Raylib_cs;
+using System.Numerics;
 
 namespace oops2d.Rendering
 {
-    public class Sprite2D : Object2D
+    public class Sprite2D : Renderer2D
     {
         public Texture2D texture;
-        public Color ColorTint;
         public bool Tiled = false;
         public Vector2 TileSize = Vector2.One;
 
@@ -37,13 +37,13 @@ namespace oops2d.Rendering
             Rectangle rect;
             if (Tiled) {
                 rect = new Rectangle(0, 0, TileSize.X, TileSize.Y);
-                Utils.DrawTextureTiled(texture, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), transform.Origin, transform.Rotation, GlobalScale, ColorTint);
+                Utils.DrawTextureTiled(texture, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), transform.Origin, transform.Rotation, GlobalScale, new Color(ColorTint.R, ColorTint.B, ColorTint.G, Alpha));
             } else {
                 rect = new Rectangle(0, 0, (float)texture.Width * GlobalScale, (float)texture.Height * GlobalScale);
                 Texture2D resizedTex = texture;
                 resizedTex.Width = (int)rect.Width;
                 resizedTex.Height = (int)rect.Height;
-                Raylib.DrawTexturePro(resizedTex, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), transform.Origin, transform.Rotation, ColorTint);
+                Raylib.DrawTexturePro(resizedTex, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), transform.Origin, transform.Rotation, new Color(ColorTint.R, ColorTint.B, ColorTint.G, Alpha));
             }
 
             base.Draw(scene);
@@ -78,7 +78,7 @@ namespace oops2d.Rendering
             base.Destroy();
         }
 
-        public virtual Rectangle GetRectangle()
+        public override Rectangle GetRectangle()
         {
             if (texture.Height == 0 || texture.Width == 0) return new Rectangle();
 
