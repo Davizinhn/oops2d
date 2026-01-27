@@ -43,7 +43,6 @@ namespace oops2d.Rendering
                 Texture2D resizedTex = texture;
                 resizedTex.Width = (int)rect.Width;
                 resizedTex.Height = (int)rect.Height;
-
                 Raylib.DrawTexturePro(resizedTex, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), transform.Origin, transform.Rotation, ColorTint);
             }
 
@@ -90,7 +89,7 @@ namespace oops2d.Rendering
                 return new Rectangle(GlobalPosition, new Vector2(rect.Width * GlobalScale, rect.Height * GlobalScale));
             } else {
                 rect = new Rectangle(0, 0, (float)texture.Width, (float)texture.Height);
-                return new Rectangle(GlobalPosition, new Vector2(rect.Width * GlobalScale, rect.Height * GlobalScale));
+                return new Rectangle(GlobalPosition - transform.Origin, new Vector2(rect.Width * GlobalScale, rect.Height * GlobalScale));
             }
         }
     }

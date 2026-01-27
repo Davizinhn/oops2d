@@ -35,7 +35,7 @@ namespace oops2d.Rendering
         public virtual Rectangle GetRectangle()
         {
             Rectangle rect = new Rectangle(GlobalPosition.X, GlobalPosition.Y, Size.X * GlobalScale, Size.Y * GlobalScale);
-            return new Rectangle(GlobalPosition, new Vector2(rect.Width * GlobalScale, rect.Height * GlobalScale));
+            return new Rectangle(GlobalPosition - transform.Origin, new Vector2(rect.Width * GlobalScale, rect.Height * GlobalScale));
         }
     }
 
