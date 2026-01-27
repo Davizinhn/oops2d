@@ -1,4 +1,4 @@
-Oops2D is a silly little 2d game engine written in C# made with Raylib :3
+Oops2D is a silly little 2d game engine written in C# built on Raylib :3
 
 ## 🚧 Roadmap
 Oops2D is under active development.  
@@ -42,9 +42,9 @@ Below is the current roadmap and progress tracker.
 ## Text Rendering
 | Status | Item |
 |------|------|
-| ⬜ | Text2D |
-| ⬜ | Font Loading |
-| ⬜ | Bitmap Font Support |
+| ✅ | Text2D |
+| 🔄 | Font Loading |
+| 🔄 | Bitmap Font Support |
 | ⬜ | Text Alignment & Wrapping |
 
 ---
