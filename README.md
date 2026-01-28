@@ -13,7 +13,7 @@ Below is the current roadmap and progress tracker.
 | ✅ | Scene2D |
 | ✅ | Object2D |
 | ✅ | Transform2D |
-| ⬜ | Component System (allow object2d extensions via components) |
+| ✅ | Component System (allow object2d extensions via components) |
 
 ---
 
@@ -23,7 +23,7 @@ Below is the current roadmap and progress tracker.
 | ✅ | Scene Object Lifecycle |
 | ✅ | Scene Switching and Loading |
 | ✅ | Object Hierarchy (parent-children interactions) |
-| ⬜ | Object Tags (for filtering in big scenes) |
+| ✅ | Object Tags (for filtering in big scenes) |
 
 ---
 
@@ -46,6 +46,16 @@ Below is the current roadmap and progress tracker.
 | ✅ | Font Loading |
 | ✅ | Bitmap Font Support |
 | ⬜ | Text Alignment & Wrapping |
+
+---
+
+## Physics
+| Status | Item |
+|------|------|
+| ✅ | Physics Module |
+| ✅ | Collider2D |
+| ⬜ | Customizable Hitbox |
+| ⬜ | Rigidbody2D |
 
 ---
 
@@ -106,16 +116,6 @@ Below is the current roadmap and progress tracker.
 | ⬜ | Debug Mode |
 | ⬜ | Documentation |
 | ⬜ | Example Projects |
-
----
-
-## Physics (Future)
-| Status | Item |
-|------|------|
-| ⬜ | Physics Module |
-| ⬜ | Box2D Integration |
-| ⬜ | PhysicsBody2D |
-| ⬜ | Collision Callbacks |
 
 ---
 
