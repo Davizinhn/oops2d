@@ -38,7 +38,7 @@ namespace oops2d.Rendering.Text
                     break;
             }
 
-            Raylib.DrawTextPro(format.Font, format.Text, transform.Position, origin, 0, format.Size, format.Spacing, format.TextColor);
+            Raylib.DrawTextPro(format.Font, format.Text, transform.Position, origin, GlobalRotation, format.Size, format.Spacing, format.TextColor);
 
             base.Draw(scene);
         }
