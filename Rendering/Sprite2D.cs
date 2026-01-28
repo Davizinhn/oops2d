@@ -12,7 +12,7 @@ namespace oops2d.Rendering
         public bool Tiled = false;
         public Vector2 TileSize = Vector2.One;
 
-        public Sprite2D(string imgPath, Vector2 pos, float rot = 0, float scale = 1, Color tint = new Color(), bool tiled = false, Vector2 tileSize = default)
+        public Sprite2D(string imgPath, Vector2 pos, float rot = 0, float scale = 1, Color tint = new Color(), Origin2D origin = Origin2D.Center, bool tiled = false, Vector2 tileSize = default)
         {
             this.ColorTint = tint;
 
@@ -26,6 +26,7 @@ namespace oops2d.Rendering
             this.transform.Position = pos;
             this.Tiled = tiled;
             this.TileSize = tileSize;
+            this.origin = origin;
 
             LoadSprite(imgPath);
         }
@@ -53,19 +54,8 @@ namespace oops2d.Rendering
         {
             if (imgPath == null) return;
 
-            Rectangle rect;
-            if (Tiled)
-            {
-                rect = new Rectangle(0, 0, TileSize.X, TileSize.Y);
-                transform.Origin = new Vector2(rect.Width / 2, rect.Height / 2);
-            } else
-            {
-                rect = new Rectangle(0, 0, (float)texture.Width, (float)texture.Height);
-                transform.Origin = new Vector2(rect.Width / 2, rect.Height / 2);
-            }
-
-
             texture = Cache.Instance.LoadTexture(imgPath);
+            this.SetOrigin(origin);
         }
 
         public override void Destroy(bool ?unloadTexture = false)

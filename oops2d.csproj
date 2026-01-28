@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="Input\Input.cs" />
     <Compile Include="Math\Utils.cs" />
+    <Compile Include="Physics\Hitbox.cs" />
     <Compile Include="Physics\Collider2D.cs" />
     <Compile Include="Rendering\Internal\Renderer2D.cs" />
     <Compile Include="Rendering\Text\Text2D.cs" />

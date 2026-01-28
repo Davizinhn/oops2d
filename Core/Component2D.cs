@@ -9,6 +9,7 @@ namespace oops2d.Core
 
         public override void Start(Scene2D scene) { base.Start(scene); }
         public override void Update(Scene2D scene) { base.Update(scene); }
+        public override void Draw(Scene2D scene) { base.Draw(scene); }
         public virtual void Destroy() { }
     }
 }

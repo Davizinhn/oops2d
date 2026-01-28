@@ -1,8 +1,7 @@
 ﻿using oops2d.Core;
 using oops2d.Rendering.Internal;
 using Raylib_cs;
-using System.Diagnostics;
-using static System.Formats.Asn1.AsnWriter;
+using System.Numerics;
 
 namespace oops2d.Physics
 {
@@ -10,27 +9,47 @@ namespace oops2d.Physics
     public class Collider2D : Component2D
     {
         public bool IsTrigger = false;
-        Rectangle bound;
+        public Hitbox hitbox = new Hitbox();
+
         List<Collider2D> colliding = new List<Collider2D>();
 
         public Action<Collider2D>? OnCollisionEnter = new Action<Collider2D>((Collider2D other) => {});
         public Action<Collider2D>? OnCollisionExit = new Action<Collider2D>((Collider2D other) => {});
         public Action<Collider2D>? OnCollisionStay = new Action<Collider2D>((Collider2D other) => {});
 
-        public override void Update(Scene2D scene)
+        public override void Start(Scene2D scene)
         {
             UpdateBounds();
+
+            base.Start(scene);
+        }
+
+        public override void Update(Scene2D scene)
+        {
+            hitbox.Bounds.Position = (parent as Object2D)!.GlobalPosition;
             CollisionCheck();
 
             base.Update(scene);
         }
 
-        void UpdateBounds()
+        public override void Draw(Scene2D scene)
+        {
+            if (hitbox.Visible)
+            {
+                Raylib.DrawRectangleLinesEx(GetHitbox(), 3, Color.Green);
+            }
+
+            base.Draw(scene);
+        }
+
+        public void UpdateBounds()
         {
             Renderer2D renderer = (parent as Renderer2D)!;
             if (renderer != null)
             {
-                bound = renderer.GetRectangle();
+                Rectangle rectangle = renderer.GetRectangle();
+                hitbox.Size = new Vector2(rectangle.Width, rectangle.Height);
+                hitbox.Bounds = renderer.GetRectangle();
             }
         }
 
@@ -50,7 +69,7 @@ namespace oops2d.Physics
                 if (otherCollider == this) continue;
                 if (colliding.Contains(otherCollider)) continue;
 
-                if (Raylib.CheckCollisionRecs(bound, otherCollider.GetBounds()))
+                if (Raylib.CheckCollisionRecs(GetHitbox(), otherCollider.GetHitbox()))
                 {
                     OnCollisionEnter!(otherCollider);
                     colliding.Add(otherCollider);
@@ -64,7 +83,7 @@ namespace oops2d.Physics
                 if (!colliding.Contains(otherCollider)) continue;
                 if (otherCollider == this) continue;
 
-                if (!Raylib.CheckCollisionRecs(bound, otherCollider.GetBounds()))
+                if (!Raylib.CheckCollisionRecs(GetHitbox(), otherCollider.GetHitbox()))
                 {
                     OnCollisionExit!(otherCollider);
                     toRemove.Add(otherCollider);
@@ -77,9 +96,25 @@ namespace oops2d.Physics
             }
         }
 
+        public void SetBounds(Rectangle rect)
+        {
+            hitbox.Bounds = rect;
+        }
+
         public Rectangle GetBounds()
         {
-            return bound;
+            return hitbox.Bounds;
+        }
+
+        public Rectangle GetHitbox()
+        {
+
+            return new Rectangle(
+                hitbox.Bounds.X + hitbox.GetOrigin().X + (hitbox.Offset.X),
+                hitbox.Bounds.Y + hitbox.GetOrigin().Y + (hitbox.Offset.Y),
+                hitbox.Size.X == 0 ? hitbox.Bounds.Width : hitbox.Size.X,
+                hitbox.Size.Y == 0 ? hitbox.Bounds.Height : hitbox.Size.Y
+            );
         }
     }
 }

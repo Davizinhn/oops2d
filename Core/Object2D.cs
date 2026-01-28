@@ -74,9 +74,10 @@ namespace oops2d.Core
             base.Start(scene);
         }
 
-        public virtual void Draw(Scene2D scene)
+        public override void Draw(Scene2D scene)
         {
             if (!Visible) { return; }
+
             foreach (Object2D obj in children)
             {
                 if (obj == null) continue;
@@ -84,6 +85,14 @@ namespace oops2d.Core
                 if (obj.UIElement) continue;
                 obj.Draw(scene);
             }
+
+            foreach (Component2D component in components)
+            {
+                if (!component.enabled) continue;
+                component.Draw(scene);
+            }
+
+            base.Draw(scene);
         }
 
         public virtual void DrawUI(Scene2D scene)
