@@ -1,5 +1,6 @@
 ﻿using oops2d.Core;
 using Raylib_cs;
+using System.Diagnostics;
 using System.Numerics;
 
 namespace oops2d.Rendering.Text
@@ -23,7 +24,22 @@ namespace oops2d.Rendering.Text
 
         public override void Draw(Scene2D scene)
         {
-            Raylib.DrawTextPro(format.Font, format.Text, transform.Position, new Vector2(0, 0), 0, format.Size, 1, format.TextColor);
+            Vector2 origin = new Vector2(0,0);
+            switch (format.Alignment)
+            {
+                case TextAlignment.Center:
+                    origin.X = Raylib.MeasureTextEx(format.Font, format.Text, format.Size, format.Spacing).X / 2;
+                    break;
+                case TextAlignment.Right:
+                    origin.X = -Raylib.MeasureTextEx(format.Font, format.Text, format.Size, format.Spacing).X;
+                    break;
+                case TextAlignment.Left:
+                    origin.X = Raylib.MeasureTextEx(format.Font, format.Text, format.Size, format.Spacing).X;
+                    break;
+            }
+
+            Raylib.DrawTextPro(format.Font, format.Text, transform.Position, origin, 0, format.Size, format.Spacing, format.TextColor);
+
             base.Draw(scene);
         }
     }

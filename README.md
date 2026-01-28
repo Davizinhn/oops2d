@@ -45,7 +45,7 @@ Below is the current roadmap and progress tracker.
 | ✅ | Text2D |
 | ✅ | Font Loading |
 | ✅ | Bitmap Font Support |
-| ⬜ | Text Alignment & Wrapping |
+| ✅ | Text Alignment & Spacing |
 
 ---
 
