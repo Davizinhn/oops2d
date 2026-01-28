@@ -1,4 +1,5 @@
 ﻿using Raylib_cs;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace oops2d.Core
 {
@@ -11,11 +12,12 @@ namespace oops2d.Core
         public Scene2D() { }
 
         List<Object2D> destroying = new List<Object2D>();
-        public virtual void Update() { 
+        public virtual void Update()
+        {
             if (!isActive) { return; }
             foreach (Object2D obj in objects)
             {
-                if (obj == null || obj.destroyed) { destroying.Add(obj); continue; }
+                if (obj == null || obj.destroyed) { destroying.Add(obj!); continue; }
                 obj.Update(this);
             }
 
@@ -24,7 +26,8 @@ namespace oops2d.Core
                 objects.Remove(obj);
             }
         }
-        public virtual void Start() {
+        public virtual void Start()
+        {
             camera2D.Zoom = 1;
         }
         public virtual void Draw()
@@ -52,7 +55,8 @@ namespace oops2d.Core
             }
         }
 
-        public virtual void Destroy() {
+        public virtual void Destroy()
+        {
             foreach (Object2D obj in objects)
             {
                 if (obj == null) continue;
@@ -62,7 +66,8 @@ namespace oops2d.Core
             SetActive(false);
         }
 
-        public virtual void Add(Object2D obj) { 
+        public virtual void Add(Object2D obj)
+        {
             if (obj == null) return;
             if (objects.Contains(obj)) return;
             objects.Add(obj);
@@ -80,6 +85,49 @@ namespace oops2d.Core
         public virtual void SetActive(bool isActive)
         {
             this.isActive = isActive;
+        }
+
+        public List<Object2D> GetObjectsByTag(string tag)
+        {
+            List<Object2D> result = new List<Object2D>();
+            foreach (Object2D obj in objects)
+            {
+                if (obj == null) continue;
+                if (obj.Tag == tag)
+                {
+                    result.Add(obj);
+                    foreach(Object2D child in obj.children)
+                    {
+                        if (child == null) continue;
+                        if (child.Tag == tag)
+                        {
+                            result.Add(child);
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+        public List<T?> GetObjectsByType<T>() where T : Component2D
+        {
+            List<T> result = new List<T>();
+            foreach (Object2D obj in objects)
+            {
+                if (obj == null) continue;
+
+                if (obj.GetComponent<T>() != null)
+                {
+                    result.Add(obj.GetComponent<T>()!);
+                }
+
+                foreach (T t in obj.GetComponentsInChildren<T>()!)
+                {
+                    if (t == null) continue;
+                    result.Add(t);
+                }
+            }
+            return result!;
         }
     }
 }
