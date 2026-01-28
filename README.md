@@ -12,8 +12,8 @@ Below is the current roadmap and progress tracker.
 | ✅ | Game Singleton (only one game instance allowed) |
 | ✅ | Scene2D |
 | ✅ | Object2D |
-| 🔄 | Transform2D |
-| ⬜ | Component System (allow object2d extensions via components) |
+| ✅ | Transform2D |
+| ✅ | Component System (allow object2d extensions via components) |
 
 ---
 
@@ -21,9 +21,9 @@ Below is the current roadmap and progress tracker.
 | Status | Item |
 |------|------|
 | ✅ | Scene Object Lifecycle |
-| 🔄 | Scene Switching and Loading |
-| 🔄 | Object Hierarchy (parent-children interactions) |
-| ⬜ | Object Tags (for filtering in big scenes) |
+| ✅ | Scene Switching and Loading |
+| ✅ | Object Hierarchy (parent-children interactions) |
+| ✅ | Object Tags (for filtering in big scenes) |
 
 ---
 
@@ -32,7 +32,7 @@ Below is the current roadmap and progress tracker.
 |------|------|
 | ✅ | Sprite2D |
 | ✅ | Rectangle2D |
-| 🔄 | oops2d.rendering Package |
+| ✅ | oops2d.rendering Package |
 | ⬜ | Custom Camera2D Implementation |
 | ⬜ | Render Order (layers) |
 | ⬜ | Visibility Culling (for better optimization) |
@@ -43,16 +43,26 @@ Below is the current roadmap and progress tracker.
 | Status | Item |
 |------|------|
 | ✅ | Text2D |
-| 🔄 | Font Loading |
-| 🔄 | Bitmap Font Support |
+| ✅ | Font Loading |
+| ✅ | Bitmap Font Support |
 | ⬜ | Text Alignment & Wrapping |
+
+---
+
+## Physics
+| Status | Item |
+|------|------|
+| ✅ | Physics Module |
+| ✅ | Collider2D |
+| ⬜ | Customizable Hitbox |
+| ⬜ | Rigidbody2D |
 
 ---
 
 ## UI Rendering
 | Status | Item |
 |------|------|
-| 🔄 | UI Render Pass (camera-independent) |
+| ✅ | UI Render Pass (camera-independent) |
 | ⬜ | UIElement Base Class |
 | ⬜ | Buttons / Labels |
 | ⬜ | Anchors & Scaling |
@@ -63,7 +73,7 @@ Below is the current roadmap and progress tracker.
 ## Math Module
 | Status | Item |
 |------|------|
-| 🔄 | oops2d.math Package |
+| ✅ | oops2d.math Package |
 | 🔄 | Math Utils |
 | ⬜ | Vector2 Utils |
 | ⬜ | Rectangle Utils |
@@ -73,7 +83,7 @@ Below is the current roadmap and progress tracker.
 ## Input System
 | Status | Item |
 |------|------|
-| 🔄 | oops2d.input Package |
+| ⬜ | oops2d.input Package |
 | ⬜ | Keyboard Input Manager |
 | ⬜ | Mouse Helper |
 | ⬜ | Action Mapping (maybe?) |
@@ -94,7 +104,7 @@ Below is the current roadmap and progress tracker.
 |------|------|
 | ✅ | Image Cache |
 | ✅ | Texture Cache |
-| ⬜ | Audio Cache |
+| 🔄 | Audio Cache |
 | ⬜ | Reference-based Auto Unload (unload when disposable) |
 
 ---
@@ -106,16 +116,6 @@ Below is the current roadmap and progress tracker.
 | ⬜ | Debug Mode |
 | ⬜ | Documentation |
 | ⬜ | Example Projects |
-
----
-
-## Physics (Future)
-| Status | Item |
-|------|------|
-| ⬜ | Physics Module |
-| ⬜ | Box2D Integration |
-| ⬜ | PhysicsBody2D |
-| ⬜ | Collision Callbacks |
 
 ---
 
