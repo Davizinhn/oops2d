@@ -54,8 +54,8 @@ Below is the current roadmap and progress tracker.
 |------|------|
 | ✅ | Physics Module |
 | ✅ | Collider2D |
-| ⬜ | Customizable Hitbox |
-| ⬜ | Rigidbody2D |
+| ✅ | Customizable Hitbox |
+| 🔄 | Rigidbody2D |
 
 ---
 
