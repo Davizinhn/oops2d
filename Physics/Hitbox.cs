@@ -3,6 +3,7 @@ using System.Numerics;
 
 namespace oops2d.Physics
 {
+    // WARNING: This class is a placeholder and does not represent a full-featured physics engine.
     public class Hitbox
     {
         public Rectangle Bounds;

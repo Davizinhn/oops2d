@@ -67,6 +67,23 @@ namespace oops2d.Core
             base.Update(scene);
         }
 
+        public override void LateUpdate(Scene2D scene)
+        {
+            foreach (Component2D component in components)
+            {
+                if (!component.enabled) continue;
+                component.LateUpdate(scene);
+            }
+
+            foreach (Object2D obj in children)
+            {
+                if (obj == null) continue;
+                obj.LateUpdate(scene);
+            }
+
+            base.LateUpdate(scene);
+        }
+
         public override void Start(Scene2D scene)
         {
             Scene = scene;

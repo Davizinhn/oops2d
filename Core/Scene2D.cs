@@ -27,6 +27,20 @@ namespace oops2d.Core
                 objects.Remove(obj);
             }
         }
+        public virtual void LateUpdate()
+        {
+            if (!isActive) { return; }
+            foreach (Object2D obj in objects)
+            {
+                if (obj == null || obj.destroyed) { destroying.Add(obj!); continue; }
+                obj.LateUpdate(this);
+            }
+
+            foreach (Object2D obj in destroying)
+            {
+                objects.Remove(obj);
+            }
+        }
         public virtual void Start()
         {
             camera2D.Zoom = 1;

@@ -116,5 +116,10 @@ namespace oops2d.Physics
                 hitbox.Size.Y == 0 ? hitbox.Bounds.Height : hitbox.Size.Y
             );
         }
+
+        public List<Collider2D> GetCollisions()
+        {
+            return colliding;
+        }
     }
 }

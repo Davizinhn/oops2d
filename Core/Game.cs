@@ -51,6 +51,7 @@ namespace oops2d.Core
                 Raylib.ClearBackground(Color.Black);
 
                 CurrentScene.Update();
+                CurrentScene.LateUpdate();
 
                 Raylib.BeginMode2D(CurrentScene.camera2D);
                 CurrentScene.Draw();
