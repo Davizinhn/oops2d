@@ -93,9 +93,9 @@ Below is the current roadmap and progress tracker.
 ## Audio
 | Status | Item |
 |------|------|
-| 🔄 | oops2d.audio Package |
-| ⬜ | Sound Effects Helpers |
-| ⬜ | Music Streaming |
+| ✅ | oops2d.audio Package |
+| ✅ | Sound |
+| ⬜ | Music |
 
 ---
 

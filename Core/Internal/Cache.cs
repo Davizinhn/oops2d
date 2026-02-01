@@ -6,8 +6,10 @@ namespace oops2d.Core.Internal
     {
         public static Cache Instance { get; private set; }
 
+        // TODO: create a var that stores all the diferent types of cache
         private Dictionary<string, TextureCache> textures = new();
         private Dictionary<string, ImageCache> images = new();
+        private Dictionary<string, SoundCache> sounds = new();
 
         public Cache() {
             Instance = this;
@@ -47,6 +49,20 @@ namespace oops2d.Core.Internal
             return loaded;
         }
 
+        public Sound LoadSound(string path)
+        {
+            if (sounds.TryGetValue(path, out SoundCache sound))
+            {
+                return sound.data;
+            }
+
+            Sound loaded = Raylib.LoadSound(path);
+            SoundCache cache = new SoundCache(path, loaded);
+            sounds[path] = cache;
+
+            return loaded;
+        }
+
         public void UnloadTexture(string path)
         {
             if (textures.TryGetValue(path, out TextureCache tex))
@@ -81,6 +97,15 @@ namespace oops2d.Core.Internal
             }
         }
 
+        public void UnloadSound(string path)
+        {
+            if (sounds.TryGetValue(path, out SoundCache sound))
+            {
+                Raylib.UnloadSound(sound.data);
+                sounds.Remove(path);
+            }
+        }
+
         public void UnloadAll()
         {
             foreach (var tex in textures.Values)
@@ -97,15 +122,25 @@ namespace oops2d.Core.Internal
                 Raylib.UnloadImage(img.image);
             }
 
+            foreach (var sound in sounds.Values)
+            {
+                Raylib.UnloadSound(sound.data);
+            }
+
             textures.Clear();
             images.Clear();
+            sounds.Clear();
         }
     }
 }
 
-class ImageCache
+class CacheReference
 {
-    public string path;
+    public string path = "";
+}
+
+class ImageCache : CacheReference
+{
     public Image image;
 
     public ImageCache(string path, Image image)
@@ -115,14 +150,24 @@ class ImageCache
     }
 }
 
-class TextureCache
+class TextureCache : CacheReference
 {
-    public string path;
     public Texture2D texture2D;
 
     public TextureCache(string path, Texture2D texture2D)
     {
         this.path = path;
         this.texture2D = texture2D;
+    }
+}
+
+class SoundCache : CacheReference
+{
+    public Sound data;
+
+    public SoundCache(string path, Sound sound)
+    {
+        this.path = path;
+        this.data = sound;
     }
 }
