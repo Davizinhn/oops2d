@@ -10,6 +10,7 @@ namespace oops2d.Core.Internal
         private Dictionary<string, TextureCache> textures = new();
         private Dictionary<string, ImageCache> images = new();
         private Dictionary<string, SoundCache> sounds = new();
+        private Dictionary<string, MusicCache> musics = new();
 
         public Cache() {
             Instance = this;
@@ -17,7 +18,7 @@ namespace oops2d.Core.Internal
 
         public Image LoadImage(string path)
         {
-            if (images.TryGetValue(path, out ImageCache img))
+            if (images.TryGetValue(path, out var img))
             {
                 return img.image;
             }
@@ -31,7 +32,7 @@ namespace oops2d.Core.Internal
 
         public Texture2D LoadTexture(string path)
         {
-            if (textures.TryGetValue(path, out TextureCache tex))
+            if (textures.TryGetValue(path, out var tex))
             {
                 if (tex.texture2D.Id != 0)
                 {
@@ -43,6 +44,7 @@ namespace oops2d.Core.Internal
 
             Image img = LoadImage(path);
             Texture2D loaded = Raylib.LoadTextureFromImage(img);
+            UnloadImage(path);
             TextureCache cache = new TextureCache(path, loaded);
             textures[path] = cache;
 
@@ -51,7 +53,7 @@ namespace oops2d.Core.Internal
 
         public Sound LoadSound(string path)
         {
-            if (sounds.TryGetValue(path, out SoundCache sound))
+            if (sounds.TryGetValue(path, out var sound))
             {
                 return sound.data;
             }
@@ -63,9 +65,23 @@ namespace oops2d.Core.Internal
             return loaded;
         }
 
+        public Music LoadMusic(string path)
+        {
+            if (musics.TryGetValue(path, out var music))
+            {
+                return music.data;
+            }
+
+            Music loaded = Raylib.LoadMusicStream(path);
+            MusicCache cache = new MusicCache(path, loaded);
+            musics[path] = cache;
+
+            return loaded;
+        }
+
         public void UnloadTexture(string path)
         {
-            if (textures.TryGetValue(path, out TextureCache tex))
+            if (textures.TryGetValue(path, out var tex))
             {
                 if (tex.texture2D.Id != 0) 
                 { 
@@ -81,8 +97,7 @@ namespace oops2d.Core.Internal
             {
                 if (kvp.Value.texture2D.Id == texture.Id)
                 {
-                    Raylib.UnloadTexture(kvp.Value.texture2D);
-                    textures.Remove(kvp.Key);
+                    UnloadTexture(kvp.Key);
                     break;
                 }
             }
@@ -90,7 +105,7 @@ namespace oops2d.Core.Internal
 
         public void UnloadImage(string path)
         {
-            if (images.TryGetValue(path, out ImageCache img))
+            if (images.TryGetValue(path, out var img))
             {
                 Raylib.UnloadImage(img.image);
                 images.Remove(path);
@@ -99,10 +114,43 @@ namespace oops2d.Core.Internal
 
         public void UnloadSound(string path)
         {
-            if (sounds.TryGetValue(path, out SoundCache sound))
+            if (sounds.TryGetValue(path, out var sound))
             {
                 Raylib.UnloadSound(sound.data);
                 sounds.Remove(path);
+            }
+        }
+
+        public void UnloadSound(Sound instance)
+        {
+            foreach (var kvp in sounds)
+            {
+                if (kvp.Value.data.Stream.Equals(instance.Stream) && kvp.Value.data.FrameCount == instance.FrameCount)
+                {
+                    UnloadSound(kvp.Key);
+                    break;
+                }
+            }
+        }
+
+        public void UnloadMusic(string path)
+        {
+            if (musics.TryGetValue(path, out var music))
+            {
+                Raylib.UnloadMusicStream(music.data);
+                musics.Remove(path);
+            }
+        }
+
+        public void UnloadMusic(Music instance)
+        {
+            foreach (var kvp in musics)
+            {
+                if (kvp.Value.data.Stream.Equals(instance.Stream) && kvp.Value.data.FrameCount == instance.FrameCount)
+                {
+                    UnloadMusic(kvp.Key);
+                    break;
+                }
             }
         }
 
@@ -114,7 +162,6 @@ namespace oops2d.Core.Internal
                 {
                     Raylib.UnloadTexture(tex.texture2D);
                 }
-
             }
 
             foreach (var img in images.Values)
@@ -127,9 +174,15 @@ namespace oops2d.Core.Internal
                 Raylib.UnloadSound(sound.data);
             }
 
+            foreach (var music in musics.Values)
+            {
+                Raylib.UnloadMusicStream(music.data);
+            }
+
             textures.Clear();
             images.Clear();
             sounds.Clear();
+            musics.Clear();
         }
     }
 }
@@ -169,5 +222,16 @@ class SoundCache : CacheReference
     {
         this.path = path;
         this.data = sound;
+    }
+}
+
+class MusicCache : CacheReference
+{
+    public Music data;
+
+    public MusicCache(string path, Music music)
+    {
+        this.path = path;
+        this.data = music;
     }
 }

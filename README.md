@@ -95,7 +95,7 @@ Below is the current roadmap and progress tracker.
 |------|------|
 | ✅ | oops2d.audio Package |
 | ✅ | Sound |
-| ⬜ | Music |
+| ✅ | Music |
 
 ---
 
@@ -104,7 +104,7 @@ Below is the current roadmap and progress tracker.
 |------|------|
 | ✅ | Image Cache |
 | ✅ | Texture Cache |
-| 🔄 | Audio Cache |
+| ✅ | Audio Cache |
 | ⬜ | Reference-based Auto Unload (unload when disposable) |
 
 ---

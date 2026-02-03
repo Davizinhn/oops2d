@@ -37,7 +37,8 @@
 
   <ItemGroup>
     <Compile Include="Audio\Internal\IAudio.cs" />
-    <Compile Include="Audio\Sound.cs" />
+    <Compile Include="Audio\Music2D.cs" />
+    <Compile Include="Audio\Sound2D.cs" />
     <Compile Include="Input\Input.cs" />
     <Compile Include="Math\Utils.cs" />
     <Compile Include="Physics\Hitbox.cs" />
