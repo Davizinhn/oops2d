@@ -1,4 +1,5 @@
 ﻿using oops2d.Core;
+using oops2d.Core.Internal;
 using Raylib_cs;
 using System.Diagnostics;
 using System.Numerics;
@@ -41,6 +42,16 @@ namespace oops2d.Rendering.Text
             Raylib.DrawTextPro(format.Font, format.Text, transform.Position, origin, GlobalRotation, format.Size, format.Spacing, format.TextColor);
 
             base.Draw(scene);
+        }
+
+        public override void Destroy(bool? unload = true)
+        {
+            if (unload == true)
+            {
+                Cache.Instance.UnloadFont(this.format.Font);
+            }
+
+            base.Destroy(unload);
         }
     }
 }

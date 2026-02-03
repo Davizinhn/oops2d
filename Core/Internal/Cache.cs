@@ -11,6 +11,7 @@ namespace oops2d.Core.Internal
         private Dictionary<string, ImageCache> images = new();
         private Dictionary<string, SoundCache> sounds = new();
         private Dictionary<string, MusicCache> musics = new();
+        private Dictionary<string, FontCache> fonts = new();
 
         public Cache() {
             Instance = this;
@@ -75,6 +76,20 @@ namespace oops2d.Core.Internal
             Music loaded = Raylib.LoadMusicStream(path);
             MusicCache cache = new MusicCache(path, loaded);
             musics[path] = cache;
+
+            return loaded;
+        }
+
+        public Font LoadFont(string path)
+        {
+            if (fonts.TryGetValue(path, out var font))
+            {
+                return font.data;
+            }
+
+            Font loaded = Raylib.LoadFont(path);
+            FontCache cache = new FontCache(path, loaded);
+            fonts[path] = cache;
 
             return loaded;
         }
@@ -154,6 +169,27 @@ namespace oops2d.Core.Internal
             }
         }
 
+        public void UnloadFont(string path)
+        {
+            if (fonts.TryGetValue(path, out var font))
+            {
+                Raylib.UnloadFont(font.data);
+                fonts.Remove(path);
+            }
+        }
+
+        public void UnloadFont(Font font)
+        {
+            foreach (var kvp in fonts)
+            {
+                if (kvp.Value.data.Texture.Equals(font.Texture))
+                {
+                    UnloadFont(kvp.Key);
+                    break;
+                }
+            }
+        }
+
         public void UnloadAll()
         {
             foreach (var tex in textures.Values)
@@ -179,10 +215,16 @@ namespace oops2d.Core.Internal
                 Raylib.UnloadMusicStream(music.data);
             }
 
+            foreach (var font in fonts.Values)
+            {
+                Raylib.UnloadFont(font.data);
+            }
+
             textures.Clear();
             images.Clear();
             sounds.Clear();
             musics.Clear();
+            fonts.Clear();
         }
     }
 }
@@ -233,5 +275,16 @@ class MusicCache : CacheReference
     {
         this.path = path;
         this.data = music;
+    }
+}
+
+class FontCache : CacheReference
+{
+    public Font data;
+
+    public FontCache(string path, Font font)
+    {
+        this.path = path;
+        this.data = font;
     }
 }

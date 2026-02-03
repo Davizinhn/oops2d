@@ -1,4 +1,5 @@
-﻿using Raylib_cs;
+﻿using oops2d.Core.Internal;
+using Raylib_cs;
 
 namespace oops2d.Rendering.Text
 {
@@ -28,7 +29,7 @@ namespace oops2d.Rendering.Text
                 return;
             }
 
-            Font = Raylib.LoadFont(fontPath);
+            Font = Cache.Instance.LoadFont(fontPath);
         }
     }
 }
