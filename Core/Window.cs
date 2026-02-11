@@ -1,12 +1,6 @@
-﻿using oops2d.Core.Internal;
-using Raylib_cs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Raylib_cs;
 
-namespace oops2d.Core
+namespace oops2d.core
 {
     public class Window
     {

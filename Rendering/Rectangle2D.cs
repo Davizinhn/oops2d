@@ -1,10 +1,10 @@
 ﻿using Raylib_cs;
 using System.Numerics;
-using oops2d.Core.Internal;
-using oops2d.Core;
-using oops2d.Rendering.Internal;
+using oops2d.core._internal;
+using oops2d.core;
+using oops2d.rendering._internal;
 
-namespace oops2d.Rendering
+namespace oops2d.rendering
 {
     public class Rectangle2D : Renderer2D
     {

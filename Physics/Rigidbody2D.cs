@@ -1,9 +1,8 @@
-﻿using oops2d.Core;
+﻿using oops2d.core;
 using Raylib_cs;
-using System.Diagnostics;
 using System.Numerics;
 
-namespace oops2d.Physics
+namespace oops2d.physics
 {
     public enum BodyType2D
     {

@@ -1,10 +1,9 @@
-﻿using oops2d.Core;
-using oops2d.Core.Internal;
+﻿using oops2d.core;
+using oops2d.core._internal;
 using Raylib_cs;
-using System.Diagnostics;
 using System.Numerics;
 
-namespace oops2d.Rendering.Text
+namespace oops2d.rendering.text
 {
     public class Text2D : Object2D
     {

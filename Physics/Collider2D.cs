@@ -1,9 +1,9 @@
-﻿using oops2d.Core;
-using oops2d.Rendering.Internal;
+﻿using oops2d.core;
+using oops2d.rendering._internal;
 using Raylib_cs;
 using System.Numerics;
 
-namespace oops2d.Physics
+namespace oops2d.physics
 {
     // WARNING: This class is a placeholder and does not represent a full-featured physics engine.
     public class Collider2D : Component2D

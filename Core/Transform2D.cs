@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace oops2d.Core
+namespace oops2d.core
 {
     public class Transform2D
     {

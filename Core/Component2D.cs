@@ -1,6 +1,6 @@
-﻿using oops2d.Core.Internal;
+﻿using oops2d.core._internal;
 
-namespace oops2d.Core
+namespace oops2d.core
 {
     public class Component2D : Behaviour
     {

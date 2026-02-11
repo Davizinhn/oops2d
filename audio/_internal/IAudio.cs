@@ -1,6 +1,6 @@
-﻿using oops2d.Core;
+﻿using oops2d.core;
 
-namespace oops2d.Audio.Internal
+namespace oops2d.audio._internal
 {
     public class IAudio : Object2D
     {

@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 
-namespace oops2d.Math
+namespace oops2d.utils
 {
-    public static class Utils
+    public static class Math
     {
         public static float Clamp(float value, float min, float max)
         {

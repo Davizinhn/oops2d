@@ -1,10 +1,10 @@
-﻿using oops2d.Core;
-using oops2d.Core.Internal;
-using oops2d.Rendering.Internal;
+﻿using oops2d.core;
+using oops2d.core._internal;
+using oops2d.rendering._internal;
 using Raylib_cs;
 using System.Numerics;
 
-namespace oops2d.Rendering
+namespace oops2d.rendering
 {
     public class Sprite2D : Renderer2D
     {
@@ -33,7 +33,7 @@ namespace oops2d.Rendering
             Rectangle rect;
             if (Tiled) {
                 rect = new Rectangle(0, 0, TileSize.X, TileSize.Y);
-                Utils.DrawTextureTiled(texture, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), transform.Origin, transform.Rotation, GlobalScale, ColorTint);
+                utils.Rendering.DrawTextureTiled(texture, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), transform.Origin, transform.Rotation, GlobalScale, ColorTint);
             } else {
                 rect = new Rectangle(0, 0, (float)texture.Width * GlobalScale, (float)texture.Height * GlobalScale);
                 Texture2D resizedTex = texture;

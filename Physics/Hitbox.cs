@@ -1,7 +1,7 @@
 ﻿using Raylib_cs;
 using System.Numerics;
 
-namespace oops2d.Physics
+namespace oops2d.physics
 {
     // WARNING: This class is a placeholder and does not represent a full-featured physics engine.
     public class Hitbox

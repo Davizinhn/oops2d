@@ -1,6 +1,6 @@
 ﻿using Raylib_cs;
 
-namespace oops2d.Core.Internal
+namespace oops2d.core._internal
 {
     internal class Cache
     {

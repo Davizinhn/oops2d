@@ -29,29 +29,32 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Core\*.cs" />
-    <Compile Include="Core\Internal\*.cs" />
-    <Compile Include="Rendering\*.cs" />
+    <Compile Include="core\*.cs" />
+    <Compile Include="core\_internal\*.cs" />
+    <Compile Include="rendering\*.cs" />
     <Compile Include="*.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Audio\Internal\IAudio.cs" />
-    <Compile Include="Audio\Music2D.cs" />
-    <Compile Include="Audio\Sound2D.cs" />
-    <Compile Include="Input\Input.cs" />
-    <Compile Include="Math\Utils.cs" />
-    <Compile Include="Physics\Hitbox.cs" />
-    <Compile Include="Physics\Collider2D.cs" />
-    <Compile Include="Physics\Rigidbody2D.cs" />
-    <Compile Include="Rendering\Internal\Renderer2D.cs" />
-    <Compile Include="Rendering\Text\Text2D.cs" />
-    <Compile Include="Rendering\Text\TextAlignment.cs" />
-    <Compile Include="Rendering\Text\TextFormat.cs" />
+    <Compile Include="audio\_internal\IAudio.cs" />
+    <Compile Include="audio\Music2D.cs" />
+    <Compile Include="audio\Sound2D.cs" />
+    <Compile Include="utils\Input.cs" />
+    <Compile Include="utils\Math.cs" />
+    <Compile Include="physics\Hitbox.cs" />
+    <Compile Include="physics\Collider2D.cs" />
+    <Compile Include="physics\Rigidbody2D.cs" />
+    <Compile Include="rendering\_internal\Renderer2D.cs" />
+    <Compile Include="rendering\text\Text2D.cs" />
+    <Compile Include="rendering\text\TextAlignment.cs" />
+    <Compile Include="rendering\text\TextFormat.cs" />
+    <Compile Include="utils\Rendering.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Rendering\UI\" />
+    <Folder Include="input\" />
+    <Folder Include="math\" />
+    <Folder Include="rendering\ui\" />
   </ItemGroup>
 
 </Project>

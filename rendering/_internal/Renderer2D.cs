@@ -1,8 +1,8 @@
-﻿using oops2d.Core;
+﻿using oops2d.core;
 using Raylib_cs;
 using System.Numerics;
 
-namespace oops2d.Rendering.Internal
+namespace oops2d.rendering._internal
 {
     public enum Origin2D
     {

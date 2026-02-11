@@ -1,7 +1,7 @@
-﻿using oops2d.Core.Internal;
+﻿using oops2d.core._internal;
 using Raylib_cs;
 
-namespace oops2d.Rendering.Text
+namespace oops2d.rendering.text
 {
     public class TextFormat
     {

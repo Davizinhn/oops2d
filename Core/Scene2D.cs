@@ -1,8 +1,6 @@
-﻿using oops2d.Core.Internal;
-using Raylib_cs;
-using static System.Formats.Asn1.AsnWriter;
+﻿using Raylib_cs;
 
-namespace oops2d.Core
+namespace oops2d.core
 {
     public class Scene2D
     {

@@ -1,10 +1,7 @@
-﻿using oops2d.Core.Internal;
-using oops2d.Physics;
-using Raylib_cs;
+﻿using oops2d.core._internal;
 using System.Numerics;
-using static System.Formats.Asn1.AsnWriter;
 
-namespace oops2d.Core
+namespace oops2d.core
 {
     public class Object2D : Behaviour
     {

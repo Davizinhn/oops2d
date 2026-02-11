@@ -1,9 +1,9 @@
 ﻿using Raylib_cs;
-using oops2d.Audio.Internal;
-using oops2d.Core.Internal;
-using oops2d.Core;
+using oops2d.audio._internal;
+using oops2d.core._internal;
+using oops2d.core;
 
-namespace oops2d.Audio
+namespace oops2d.audio
 {
     public class Music2D : IAudio
     {

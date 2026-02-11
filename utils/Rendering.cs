@@ -1,9 +1,9 @@
 ﻿using Raylib_cs;
 using System.Numerics;
 
-namespace oops2d.Rendering
+namespace oops2d.utils
 {
-    public static class Utils
+    public static class Rendering
     {
         public static void DrawTextureTiled(Texture2D texture, Rectangle source, Rectangle dest, Vector2 origin, float rotation, float scale, Color tint)
         {
@@ -16,7 +16,7 @@ namespace oops2d.Rendering
             if (dest.Width < tileWidth && dest.Height < tileHeight)
             {
                 Raylib.DrawTexturePro(texture,
-                    new Rectangle(source.X, source.Y, ((float)dest.Width / tileWidth) * source.Width, ((float)dest.Height / tileHeight) * source.Height),
+                    new Rectangle(source.X, source.Y, dest.Width / tileWidth * source.Width, dest.Height / tileHeight * source.Height),
                     dest,
                     origin,
                     rotation,
@@ -28,7 +28,7 @@ namespace oops2d.Rendering
                 for (; dy + tileHeight < dest.Height; dy += tileHeight)
                 {
                     Raylib.DrawTexturePro(texture,
-                        new Rectangle(source.X, source.Y, ((float)dest.Width / tileWidth) * source.Width, source.Height),
+                        new Rectangle(source.X, source.Y, dest.Width / tileWidth * source.Width, source.Height),
                         new Rectangle(dest.X, dest.Y + dy, dest.Width, tileHeight),
                         origin,
                         rotation,
@@ -38,7 +38,7 @@ namespace oops2d.Rendering
                 if (dy < dest.Height)
                 {
                     Raylib.DrawTexturePro(texture,
-                        new Rectangle(source.X, source.Y, ((float)dest.Width / tileWidth) * source.Width, ((float)(dest.Height - dy) / tileHeight) * source.Height),
+                        new Rectangle(source.X, source.Y, dest.Width / tileWidth * source.Width, (float)(dest.Height - dy) / tileHeight * source.Height),
                         new Rectangle(dest.X, dest.Y + dy, dest.Width, dest.Height - dy),
                         origin,
                         rotation,
@@ -51,7 +51,7 @@ namespace oops2d.Rendering
                 for (; dx + tileWidth < dest.Width; dx += tileWidth)
                 {
                     Raylib.DrawTexturePro(texture,
-                        new Rectangle(source.X, source.Y, source.Width, ((float)dest.Height / tileHeight) * source.Height),
+                        new Rectangle(source.X, source.Y, source.Width, dest.Height / tileHeight * source.Height),
                         new Rectangle(dest.X + dx, dest.Y, tileWidth, dest.Height),
                         origin,
                         rotation,
@@ -61,7 +61,7 @@ namespace oops2d.Rendering
                 if (dx < dest.Width)
                 {
                     Raylib.DrawTexturePro(texture,
-                        new Rectangle(source.X, source.Y, ((float)(dest.Width - dx) / tileWidth) * source.Width, ((float)dest.Height / tileHeight) * source.Height),
+                        new Rectangle(source.X, source.Y, (float)(dest.Width - dx) / tileWidth * source.Width, dest.Height / tileHeight * source.Height),
                         new Rectangle(dest.X + dx, dest.Y, dest.Width - dx, dest.Height),
                         origin,
                         rotation,
@@ -84,7 +84,7 @@ namespace oops2d.Rendering
                     if (dy < dest.Height)
                     {
                         Raylib.DrawTexturePro(texture,
-                            new Rectangle(source.X, source.Y, source.Width, ((float)(dest.Height - dy) / tileHeight) * source.Height),
+                            new Rectangle(source.X, source.Y, source.Width, (float)(dest.Height - dy) / tileHeight * source.Height),
                             new Rectangle(dest.X + dx, dest.Y + dy, tileWidth, dest.Height - dy),
                             origin, rotation, tint);
                     }
@@ -96,7 +96,7 @@ namespace oops2d.Rendering
                     for (; dy + tileHeight < dest.Height; dy += tileHeight)
                     {
                         Raylib.DrawTexturePro(texture,
-                            new Rectangle(source.X, source.Y, ((float)(dest.Width - dx) / tileWidth) * source.Width, source.Height),
+                            new Rectangle(source.X, source.Y, (float)(dest.Width - dx) / tileWidth * source.Width, source.Height),
                             new Rectangle(dest.X + dx, dest.Y + dy, dest.Width - dx, tileHeight),
                             origin, rotation, tint);
                     }
@@ -104,7 +104,7 @@ namespace oops2d.Rendering
                     if (dy < dest.Height)
                     {
                         Raylib.DrawTexturePro(texture,
-                            new Rectangle(source.X, source.Y, ((float)(dest.Width - dx) / tileWidth) * source.Width, ((float)(dest.Height - dy) / tileHeight) * source.Height),
+                            new Rectangle(source.X, source.Y, (float)(dest.Width - dx) / tileWidth * source.Width, (float)(dest.Height - dy) / tileHeight * source.Height),
                             new Rectangle(dest.X + dx, dest.Y + dy, dest.Width - dx, dest.Height - dy),
                             origin, rotation, tint);
                     }
