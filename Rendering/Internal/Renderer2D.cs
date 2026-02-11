@@ -20,7 +20,6 @@ namespace oops2d.Rendering.Internal
     public class Renderer2D : Object2D
     {
         public Color ColorTint;
-        public float Alpha = 1;
         public Origin2D origin = Origin2D.Center;
 
         public virtual Rectangle GetRectangle()

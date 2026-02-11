@@ -12,21 +12,16 @@ namespace oops2d.Rendering
         public bool Tiled = false;
         public Vector2 TileSize = Vector2.One;
 
-        public Sprite2D(string imgPath, Vector2 pos, float rot = 0, float scale = 1, Color tint = new Color(), Origin2D origin = Origin2D.Center, bool tiled = false, Vector2 tileSize = default)
+        public Sprite2D(string imgPath, Vector2 pos, float rot = 0, float scale = 1, Origin2D origin = Origin2D.Center, bool tiled = false, Vector2 tileSize = default)
         {
-            this.ColorTint = tint;
-
-            if (tint.ToString() == new Color().ToString())
-            {
-                ColorTint = Color.White;
-            }
-
             this.transform.Rotation = rot;
             this.transform.Scale = scale;
             this.transform.Position = pos;
             this.Tiled = tiled;
             this.TileSize = tileSize;
             this.origin = origin;
+
+            ColorTint = Color.White;
 
             LoadSprite(imgPath);
         }
@@ -38,13 +33,13 @@ namespace oops2d.Rendering
             Rectangle rect;
             if (Tiled) {
                 rect = new Rectangle(0, 0, TileSize.X, TileSize.Y);
-                Utils.DrawTextureTiled(texture, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), transform.Origin, transform.Rotation, GlobalScale, new Color(ColorTint.R, ColorTint.B, ColorTint.G, Alpha));
+                Utils.DrawTextureTiled(texture, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), transform.Origin, transform.Rotation, GlobalScale, ColorTint);
             } else {
                 rect = new Rectangle(0, 0, (float)texture.Width * GlobalScale, (float)texture.Height * GlobalScale);
                 Texture2D resizedTex = texture;
                 resizedTex.Width = (int)rect.Width;
                 resizedTex.Height = (int)rect.Height;
-                Raylib.DrawTexturePro(resizedTex, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), transform.Origin, transform.Rotation, new Color(ColorTint.R, ColorTint.B, ColorTint.G, Alpha));
+                Raylib.DrawTexturePro(resizedTex, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), transform.Origin, transform.Rotation, ColorTint);
             }
 
             base.Draw(scene);

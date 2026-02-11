@@ -10,15 +10,9 @@ namespace oops2d.Rendering
     {
         public Vector2 Size;
 
-        public Rectangle2D(Color tint = new Color(), Vector2 pos = default, Vector2 size = default, float rot = 0)
+        public Rectangle2D(Color tint, Vector2 pos = default, Vector2 size = default, float rot = 0)
         {
             this.ColorTint = tint;
-
-            if (tint.ToString() == new Color().ToString())
-            {
-                ColorTint = Color.White;
-            }
-
             this.transform.Rotation = rot;
             this.transform.Position = pos;
             this.Size = size;
@@ -27,7 +21,7 @@ namespace oops2d.Rendering
         public override void Draw(Scene2D scene)
         {
             Rectangle rect = new Rectangle(GlobalPosition.X, GlobalPosition.Y, Size.X * GlobalScale, Size.Y * GlobalScale);
-            Raylib.DrawRectanglePro(rect, transform.Origin, transform.Rotation, new Color(ColorTint.R, ColorTint.B, ColorTint.G, Alpha));
+            Raylib.DrawRectanglePro(rect, transform.Origin, transform.Rotation, ColorTint);
 
             base.Draw(scene);
         }
