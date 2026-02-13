@@ -49,6 +49,7 @@
     <Compile Include="rendering\text\TextAlignment.cs" />
     <Compile Include="rendering\text\TextFormat.cs" />
     <Compile Include="utils\Rendering.cs" />
+    <Compile Include="utils\O2Timer.cs" />
   </ItemGroup>
 
   <ItemGroup>
