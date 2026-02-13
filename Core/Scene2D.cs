@@ -1,4 +1,5 @@
 ﻿using Raylib_cs;
+using System.Collections.Immutable;
 
 namespace oops2d.core
 {
@@ -13,9 +14,12 @@ namespace oops2d.core
         List<Object2D> destroying = new List<Object2D>();
         public virtual void Update()
         {
-            if (!isActive) { return; }
-            foreach (Object2D obj in objects)
+            if (!isActive) return;
+
+            ImmutableList<Object2D> objBkp = objects.ToImmutableList<Object2D>();
+            foreach (Object2D obj in objBkp)
             {
+                if (!isActive) return;
                 if (obj == null || obj.destroyed) { destroying.Add(obj!); continue; }
                 obj.Update(this);
             }
@@ -27,9 +31,10 @@ namespace oops2d.core
         }
         public virtual void LateUpdate()
         {
-            if (!isActive) { return; }
+            if (!isActive) return;
             foreach (Object2D obj in objects)
             {
+                if (!isActive) return;
                 if (obj == null || obj.destroyed) { destroying.Add(obj!); continue; }
                 obj.LateUpdate(this);
             }
@@ -48,6 +53,7 @@ namespace oops2d.core
             if (!isActive) { return; }
             foreach (Object2D obj in objects)
             {
+                if (!isActive) return;
                 if (obj == null) continue;
                 if (!obj.Visible) continue;
                 if (obj.UIElement) continue;
@@ -70,13 +76,13 @@ namespace oops2d.core
 
         public virtual void Destroy()
         {
+            SetActive(false);
             foreach (Object2D obj in objects)
             {
                 if (obj == null) continue;
                 obj.Destroy();
             }
             objects.Clear();
-            SetActive(false);
         }
 
         public virtual void Add(Object2D obj)

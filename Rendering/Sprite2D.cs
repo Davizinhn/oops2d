@@ -63,7 +63,7 @@ namespace oops2d.rendering
             base.Destroy();
         }
 
-        public override Rectangle GetRectangle()
+        public override Rectangle GetRectangle(bool local = false)
         {
             if (texture.Height == 0 || texture.Width == 0) return new Rectangle();
 
@@ -71,10 +71,10 @@ namespace oops2d.rendering
 
             if (Tiled) {
                 rect = new Rectangle(0, 0, TileSize.X, TileSize.Y);
-                return new Rectangle(GlobalPosition, new Vector2(rect.Width * GlobalScale, rect.Height * GlobalScale));
+                return new Rectangle(local ? transform.Position : GlobalPosition, new Vector2(rect.Width * GlobalScale, rect.Height * GlobalScale));
             } else {
                 rect = new Rectangle(0, 0, (float)texture.Width, (float)texture.Height);
-                return new Rectangle(GlobalPosition - transform.Origin, new Vector2(rect.Width * GlobalScale, rect.Height * GlobalScale));
+                return new Rectangle((local ? transform.Position : GlobalPosition) - transform.Origin, new Vector2(rect.Width * GlobalScale, rect.Height * GlobalScale));
             }
         }
     }

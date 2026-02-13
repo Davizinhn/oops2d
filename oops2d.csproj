@@ -39,6 +39,7 @@
     <Compile Include="audio\_internal\IAudio.cs" />
     <Compile Include="audio\Music2D.cs" />
     <Compile Include="audio\Sound2D.cs" />
+    <Compile Include="rendering\ui\Button2D.cs" />
     <Compile Include="utils\Input.cs" />
     <Compile Include="utils\Math.cs" />
     <Compile Include="physics\Hitbox.cs" />
@@ -55,7 +56,6 @@
   <ItemGroup>
     <Folder Include="input\" />
     <Folder Include="math\" />
-    <Folder Include="rendering\ui\" />
   </ItemGroup>
 
 </Project>

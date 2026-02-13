@@ -38,7 +38,7 @@ namespace oops2d.physics
             {
                 Raylib.DrawRectangleLinesEx(GetHitbox(), 3, Color.Green);
             }
-
+            
             base.Draw(scene);
         }
 

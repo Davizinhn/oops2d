@@ -26,10 +26,10 @@ namespace oops2d.rendering
             base.Draw(scene);
         }
 
-        public override Rectangle GetRectangle()
+        public override Rectangle GetRectangle(bool local = false)
         {
-            Rectangle rect = new Rectangle(GlobalPosition.X, GlobalPosition.Y, Size.X * GlobalScale, Size.Y * GlobalScale);
-            return new Rectangle(GlobalPosition - transform.Origin, new Vector2(rect.Width * GlobalScale, rect.Height * GlobalScale));
+            Rectangle rect = new Rectangle(local ? transform.Position.X : GlobalPosition.X, local ? transform.Position.Y : GlobalPosition.Y, Size.X * GlobalScale, Size.Y * GlobalScale);
+            return new Rectangle((local ? transform.Position : GlobalPosition) - transform.Origin, new Vector2(rect.Width * GlobalScale, rect.Height * GlobalScale));
         }
     }
 

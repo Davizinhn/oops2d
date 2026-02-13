@@ -1,5 +1,6 @@
 ﻿using oops2d.core._internal;
 using Raylib_cs;
+using System.Numerics;
 
 namespace oops2d.rendering.text
 {
@@ -26,6 +27,7 @@ namespace oops2d.rendering.text
         {
             if (string.IsNullOrEmpty(fontPath))
             {
+                Font = Raylib.GetFontDefault();
                 return;
             }
 

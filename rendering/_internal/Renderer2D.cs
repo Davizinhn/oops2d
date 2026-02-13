@@ -22,7 +22,7 @@ namespace oops2d.rendering._internal
         public Color ColorTint;
         public Origin2D origin = Origin2D.Center;
 
-        public virtual Rectangle GetRectangle()
+        public virtual Rectangle GetRectangle(bool local = false)
         {
             return new Rectangle();
         }
