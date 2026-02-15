@@ -64,7 +64,7 @@ Below is the current roadmap and progress tracker.
 |------|------|
 | ✅ | UI Render Pass (camera-independent) |
 | ⬜ | UIElement Base Class |
-| ⬜ | Buttons / Labels |
+| ✅ | Buttons / Labels |
 | ⬜ | Anchors & Scaling |
 | ⬜ | Basic Layout System |
 

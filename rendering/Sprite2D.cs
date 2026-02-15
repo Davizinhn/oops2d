@@ -36,6 +36,9 @@ namespace oops2d.rendering
     public class Sprite2D : Renderer2D
     {
         public Texture2D texture;
+        public bool flipX = false;
+        public bool flipY = false;
+
         public bool Tiled = false;
         public Vector2 TileSize = Vector2.One;
 
@@ -72,13 +75,14 @@ namespace oops2d.rendering
                 } 
                 else
                 {
-                    rect = new Rectangle(curAnimationFrame * (curAnimation.texture.Width / curAnimation.frames), 0, (float)curAnimation.texture.Width/curAnimation.frames * GlobalScale, (float)curAnimation.texture.Height * GlobalScale);
+                    rect = new Rectangle((flipX ? ((curAnimation.frames-1) - curAnimationFrame) : (curAnimationFrame)) * (curAnimation.texture.Width / curAnimation.frames), 0, (float)curAnimation.texture.Width/curAnimation.frames * GlobalScale, (float)curAnimation.texture.Height * GlobalScale);
                 }
 
                 Texture2D resizedTex = curAnimation == null ? texture : curAnimation.texture;
-
                 resizedTex.Width = curAnimation == null ? (int)rect.Width : (int)rect.Width * curAnimation.frames;
-                resizedTex.Height = (int)rect.Height;
+
+                resizedTex.Height = flipY ? -(int)rect.Height : (int)rect.Height;
+                resizedTex.Width = flipX ? -resizedTex.Width : resizedTex.Width;
 
                 Raylib.DrawTexturePro(resizedTex, rect, new Rectangle(GlobalPosition, new Vector2(rect.Width, rect.Height)), transform.Origin, transform.Rotation, ColorTint);
             }
@@ -157,6 +161,13 @@ namespace oops2d.rendering
 
         public void AddAnimation(Sprite2DAnimation animation)
         {
+            if (Tiled)
+            {
+                // TODO: Add tiled sprite animation support
+                Debug.Fail("Tiled sprites doesn't support animations"); 
+                return;
+            }
+
             if (animation == null) return;
             if (animations.Find(anim => anim.name == animation.name) != null) return;
 
